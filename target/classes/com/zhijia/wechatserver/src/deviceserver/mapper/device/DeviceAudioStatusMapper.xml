@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhijia.wechatserver.src.deviceserver.mapper.device.DeviceAudioStatusMapper">
+	<resultMap id="BaseResultMap" type="com.zhijia.wechatserver.src.deviceserver.entity.device.DeviceAudioStatus">
+		<result column="zjkey" property="zjkey" jdbcType="VARCHAR" />
+		<result column="deviceId" property="deviceId" jdbcType="VARCHAR" />
+		<result column="play" property="play" jdbcType="INTEGER" />
+		<result column="audioId" property="audioId" jdbcType="INTEGER" />
+		
+		<result column="section" property="section" jdbcType="VARCHAR" />
+		<result column="resId" property="resId" jdbcType="INTEGER" />
+		<result column="res" property="res" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<insert id="insertOrUpdateDeviceAudioStatus" parameterType="com.zhijia.wechatserver.src.deviceserver.entity.device.DeviceAudioStatus">
+		insert into tb_device_audio_status(zjkey, deviceId, play, audioId)
+		values(
+			#{zjkey, jdbcType=VARCHAR}, #{deviceId, jdbcType=VARCHAR}, #{play, jdbcType=INTEGER}, #{audioId, jdbcType=INTEGER} 
+		)
+		ON DUPLICATE KEY UPDATE
+			play = values(play), audioId = values(audioId)
+	</insert>
+
+	<select id="selectDeviceAudioStatusByDeviceId" resultType="com.zhijia.wechatserver.src.deviceserver.entity.device.DeviceAudioStatus">
+		SELECT tdas.zjkey, tdas.deviceId, tdas.play, tdas.audioId, tprl.`section`, tprl.`resId`, tprl.res FROM tb_device_audio_status  tdas
+		LEFT JOIN tb_play_resource_list tprl ON tdas.`audioId` = tprl.`id`
+		WHERE CONCAT(tdas.zjkey, '_', tdas.deviceId) = #{deviceId, jdbcType=VARCHAR}
+	</select>
+</mapper>

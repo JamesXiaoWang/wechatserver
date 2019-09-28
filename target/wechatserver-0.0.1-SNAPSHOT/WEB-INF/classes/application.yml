@@ -1,0 +1,17 @@
+spring:
+  profiles:
+    active:
+      - prd
+  thymeleaf: 
+    cache: false
+    encoding: UTF-8
+    enabled: false
+    
+  mvc: 
+    view:
+      prefix: /WEB-INF/pages/
+      suffix: .jsp
+
+mybatis:
+  #mapper-locations: com.zhijia.wechatserver.src.mapper.*
+  type-aliases-package: com.zhijia.wechatserver.src.entity.*

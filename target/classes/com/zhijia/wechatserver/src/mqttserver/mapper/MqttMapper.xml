@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhijia.wechatserver.src.mqttserver.mapper.MqttMapper">
+	<resultMap id="MqttAclBaseResultMap" type="com.zhijia.wechatserver.src.mqttserver.entity.MqttAcl">
+		<result column="id" property="id" jdbcType="INTEGER" />
+		<result column="username" property="username" jdbcType="VARCHAR" />
+		<result column="clientid" property="clientid" jdbcType="VARCHAR" />
+		<result column="topic" property="topic" jdbcType="VARCHAR" />
+		<result column="allow" property="allow" jdbcType="INTEGER" />
+		<result column="ipaddr" property="ipaddr" jdbcType="VARCHAR" />
+		<result column="access" property="access" jdbcType="INTEGER" />
+		<result column="status" property="status" jdbcType="INTEGER" />
+	</resultMap>
+	
+	<insert id="insertMqttAcl" parameterType="com.zhijia.wechatserver.src.mqttserver.entity.MqttAcl">
+		insert into mqtt_acl(username, clientid, topic, allow, ipaddr, access, status)
+		values(
+			#{username, jdbcType=VARCHAR},#{clientid, jdbcType=VARCHAR},#{topic, jdbcType=VARCHAR},
+			#{allow, jdbcType=INTEGER},#{ipaddr, jdbcType=VARCHAR},#{access, jdbcType=INTEGER},#{status, jdbcType=INTEGER}
+		)
+		ON DUPLICATE KEY UPDATE
+			allow = values(allow), ipaddr = values(ipaddr), access = values(access), status = values(status)
+	</insert>
+	
+	
+	<resultMap id="MqttUserBaseResultMap" type="com.zhijia.wechatserver.src.mqttserver.entity.MqttUser">
+		<result column="id" property="id" jdbcType="INTEGER" />
+		<result column="username" property="username" jdbcType="VARCHAR" />
+		<result column="password" property="password" jdbcType="VARCHAR" />
+		<result column="salt" property="salt" jdbcType="VARCHAR" />
+		<result column="is_superuser" property="is_superuser" jdbcType="INTEGER" />
+		<result column="created" property="created" jdbcType="TIMESTAMP" />
+		<result column="status" property="status" jdbcType="INTEGER" />
+	</resultMap>
+
+	<insert id="insertMqttUser" parameterType="com.zhijia.wechatserver.src.mqttserver.entity.MqttUser">
+		insert into mqtt_user(username, password, salt, is_superuser, created, status)
+		values(
+			#{username, jdbcType=VARCHAR},#{password, jdbcType=VARCHAR},#{salt, jdbcType=VARCHAR},
+			#{is_superuser, jdbcType=INTEGER},#{created, jdbcType=TIMESTAMP},#{status, jdbcType=INTEGER}
+		)
+		ON DUPLICATE KEY UPDATE
+			password = values(password), salt = values(salt), is_superuser = values(is_superuser), 
+			created = values(created), status = values(status)
+	</insert>
+</mapper>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhijia.wechatserver.src.deviceserver.mapper.wechat.WechatAuthorizeMapper">
+	<resultMap id="BASEResultMap" type="com.zhijia.wechatserver.src.deviceserver.entity.wechat.WechatAuthorize">
+		<result column="id" property="id" jdbcType="INTEGER" />
+		<result column="zjkey" property="zjkey" jdbcType="VARCHAR" />
+		<result column="gzhname" property="gzhname" jdbcType="VARCHAR" />
+		<result column="wechatid" property="wechatid" jdbcType="VARCHAR" />
+		<result column="appid" property="appid" jdbcType="VARCHAR" />
+		<result column="appsecret" property="appsecret" jdbcType="VARCHAR" />
+		<result column="apptoken" property="apptoken" jdbcType="VARCHAR" />
+		<result column="qrcodelink" property="qrcodelink" jdbcType="VARCHAR" />
+		<result column="authfile" property="authfile" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<select id="selectWechatAuthorizeByWechatid" resultMap="BASEResultMap">
+		select wechatid, appid, appsecret from tb_wechat_authorize where wechatid = #{wechatid, jdbcType=VARCHAR} 
+		group by wechatid
+	</select>
+	
+	<select id="selectWechatAuthorizeByAppId" resultMap="BASEResultMap">
+		select id, zjkey, gzhname, wechatid, appid, appsecret, apptoken, qrcodelink, authfile from tb_wechat_authorize
+		where appid = #{appid, jdbcType=VARCHAR} 
+	</select>
+	
+	<select id="selectWechatAuthorizeByParams" resultMap="BASEResultMap">
+		select zjkey, gzhname, wechatid, appid, appsecret, apptoken, qrcodelink, authfile from tb_wechat_authorize
+		<where>
+			<if test="appid != '' and appid != null">
+				appid = #{appid, jdbcType=VARCHAR}
+			</if>
+			<if test="zjkey != '' and zjkey != null">
+			 	and zjkey = #{zjkey, jdbcType=VARCHAR}
+			</if>
+		</where>
+		GROUP BY appid
+	</select>
+	
+	<select id="selectWechatAuthorizeList" resultMap="BASEResultMap">
+		select id, zjkey, gzhname, wechatid, appid, appsecret, apptoken, qrcodelink, authfile from tb_wechat_authorize
+		GROUP BY appid
+	</select>
+</mapper>

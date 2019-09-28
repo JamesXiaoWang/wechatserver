@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Test set: TestWx
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.758 s <<< FAILURE! - in TestWx
+testToken(TestWx)  Time elapsed: 0.732 s  <<< ERROR!
+net.sf.json.JSONException: JSONObject["access_token"] not found.
+	at TestWx.testToken(TestWx.java:12)
+

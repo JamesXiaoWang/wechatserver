@@ -1,0 +1,214 @@
+body,ul,ol,li{margin:0;padding:0;}
+ul,ol{list-style:none;}
+a{text-decoration:none;color:#45484d;}
+
+#resource .content{
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    padding: 10px 10px;
+    background: #FFFFFF;
+}
+#resource .content .swiper-container{
+    width:100%;
+    height:8.2rem;
+    padding-bottom: 0;
+    border-radius: 25px;
+    -moz-border-radius: 25px;
+}
+.swiper-container .swiper-slide{
+    background:#fff ;
+    text-align: center;
+    font-size:1rem;
+}
+.swiper-container .swiper-slide img{
+    width:100%;
+    height:100%;
+}
+
+#resource .nav-list{
+    width: 100%;
+    height: 6.3rem;
+
+    margin-bottom:0.6rem;
+    margin-left:0;
+    text-align: center;
+}
+#resource .nav-list .col-20{
+    width: 20%;
+}
+#resource .nav-list i{
+    display: inline-block;
+    min-width: 2.85rem;
+    min-height: 2.8rem;
+    width:2.6rem;
+    height:2.6rem;
+    margin-top:1.2rem;
+    background-size: 2.6rem !important;
+    background-position:center center !important;
+}
+#resource .nav-list span{
+    display: inline-block;
+    width: 100%;
+    font-family: PingFangSC-Regular;
+    font-size: 0.7rem;
+    color: #333333;
+    letter-spacing: -0.34px;
+    line-height: 1.5rem;
+    text-align: center;
+}
+#resource .nav-list .story_ico{
+    background:url(../images/story_ico.png) no-repeat;
+}
+#resource .nav-list .Chants_ico{
+    background: url(../images/chants_ico.png) no-repeat;
+}
+#resource .nav-list .sinology_ico{
+    background: url(../images/sinology_ico.png) no-repeat;
+}
+#resource .nav-list .english_ico{
+    background: url(../images/english_ico.png) no-repeat;
+}
+#resource .content-block{
+    margin:0;
+    margin-bottom:0.6rem ;
+    padding: 0;
+    background: #fff;
+}
+#resource .content-block .block_title{
+    height:2.5rem;
+    padding:0 0.75rem;
+    border: 1px solid #EEEEEE;
+    margin-bottom:8px;
+}
+#resource .content-block .no_bottom{
+    margin-bottom:0;
+}
+#resource .content-block .ul-list li{
+    margin-bottom:0.4rem;
+}
+#resource .content-block .block_title a{
+    display: inline-block;
+    width: 100%;
+    height:100%;
+    line-height:2.4rem;
+}
+#resource .content-block .block_title  span{
+    font-family: PingFangSC-Regular;
+    font-size: 0.7rem;
+    color: #333333;
+    letter-spacing: -0.34px;
+}
+#resource .content-block .block_title .fl_l{
+    float: left;
+}
+#resource .content-block .block_title .fl_r{
+    float: right;
+    color:#666;
+}
+
+#resource .content-block .block_title  i{
+    display: inline-block;
+    width:0.7rem;
+    height:0.7rem;
+    background: url(../images/info-more.png) no-repeat;
+    vertical-align: -2px;
+    background-size:0.7rem !important;
+    margin-left:2px;
+}
+#resource .content-block .recommend-list li{
+    height:2.8rem;
+    border-bottom: 1px solid #EEEEEE;
+    box-sizing: border-box;
+}
+
+#resource li .item-title{
+    float:left;
+    height: 100%;
+}
+#resource li .item-title .play-ico{
+    display: inline-block;
+    width:1.2rem;
+    height:1.2rem;
+    background:url(../images/play-ico.png) no-repeat;
+    margin: 0 0.4rem 0 0.8rem;
+    vertical-align: middle;
+    background-size:1.2rem !important;
+}
+
+#resource li .item-title .pause-ico{
+    background:url(../images/ico_pause_blue.png) no-repeat;
+}
+#resource li .item-title .loadingImg{
+    background:url(../images/loading.gif) no-repeat;
+    background-size:1.2rem !important;
+}
+#resource li .item-title span{
+    font-family: PingFangSC-Regular;
+    font-size: 0.7rem;
+    color: #333333;
+    letter-spacing: -0.39px;
+    line-height: 2.8rem;
+    vertical-align: middle;
+    display: inline-block;
+    max-width: 10rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+#resource li .item-after{
+    float:right;
+    height: 2.8rem;
+}
+#resource li .item-after i{
+    float:left;
+    width:1.2rem;
+    height:1.2rem;
+    vertical-align: middle;
+    margin-right:0.8rem;
+    margin-top:0.8rem;
+    -webkit-background-size:1.2rem!important;
+    background-size:1.2rem!important;
+}
+#resource li .item-after .audition-ico{
+    background:url(../images/audition-ico.png) no-repeat;
+}
+#resource li .item-after .collect-ico{
+    background: url(../images/collect-ico.png) no-repeat;
+}
+#resource li .item-after .listen_ico{
+    background: url(../images/listen_ico.png) no-repeat;
+}
+#resource li .item-after .hascollect-ico{
+    background: url(../images/hascollect-ico.png) no-repeat;
+}
+#resource .content-block .ul-list img{
+    height:4.55rem;
+    width: 100%;
+}
+#resource .content-block .ul-list .col-25 span{
+    display: inline-block;
+    width: 100%;
+    font-family: PingFangSC-Regular;
+    font-size: 0.7rem;
+    color: #333333;
+    letter-spacing: -0.34px;
+    text-align: center;
+    height:2.1rem;
+    overflow : hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+/*专辑页面*/
+#resource .album_bar{
+	width:100%;
+	height:10rem;
+	margin-bottom:0.6rem ;
+}
+#resource .album_bar img{
+	width:100%;
+	height:10rem;
+}

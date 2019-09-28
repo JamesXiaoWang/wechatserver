@@ -1,0 +1,65 @@
+@charset "utf-8";
+body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td{margin:0;padding:0;word-wrap:break-word}
+html{font-size:62.5%;background-color:#fff;}
+body,input{font-family:'Microsoft YaHei',Verdana,'sans-serif';font-size:1.3rem;line-height:1.5;color:#333;}
+table{border-collapse:collapse;border-spacing:0;}img{border:none}
+pre {white-space:pre-wrap; /* css-3 */white-space:-moz-pre-wrap; /* Mozilla, since 1999 */white-space:-pre-wrap; /* Opera 4-6 */white-space:-o-pre-wrap; /* Opera 7 */	word-wrap:break-word; /* Internet Explorer 5.5+ */}
+h1,h2,h3,h4,h5,h6{font-size:1.6rem;font-weight:normal;}input.dialog{height:0; height:0; font-size:0; line-height:0; border:none}
+input,label,img,th{vertical-align:middle;}.font-fixh{font-family:Georgia,Arial; color:#f00; font-size:16px; font-weight:700;}
+address,cite,dfn,em,var{font-style:normal;}
+code,kbd,pre,samp{font-family:courier new,courier,monospace;}
+ul,ol,li{list-style:none;}
+a{text-decoration:none;}
+a:hover{text-decoration:none;}
+select optgroup{color:#CAC8BB;}
+input,button,select,textarea{outline:none}
+/*清除浮动*/
+.clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden;}
+* html .clearfix {height:1%;}
+textarea{resize:none}
+input{-webkit-appearance:none;}
+* {
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	box-sizing:border-box;
+	tap-highlight-color:transparent;
+	appearance:none;
+	-webkit-tap-highlight-color:transparent;
+	-webkit-appearance:none;
+}
+
+
+/* CSS Document */
+.wx_main{text-align:center;font-size:1.6rem;}
+.wx_main .wx_msg{color:#666;height:4rem;margin:2rem 0 3rem 0;}
+.wx_checkbox{display:inline-block;width:1.6rem;height:1.6rem;border-radius:50%;border:1px solid #999;}
+.wxc{position:relative;top:-0.25rem;}
+.wxb{margin-bottom:1rem;}
+.wx_btn{width:90%;background-color:#1aac19;border-radius:0.5rem;line-height:5rem;text-align:center;color:#fff;margin:0 auto 2rem;}
+.wx_btn.normalClick{background-color:#109b0f;}
+.shake-horizontal.normalClick{background:none;}
+
+.main{
+	max-width:1080px;
+	min-width:320px;
+	margin:0 auto;
+	overflow:hidden;
+}
+
+.shake-horizontal{margin-bottom:4rem;padding:1rem 0;}
+@keyframes shake-horizontal {
+	0%{transform:translateX(0px);}
+	25%{transform:translateX(-5px);}
+	75%{transform:translateX(5px);}
+	100%{transform:translateX(0px);}
+}
+@-webkit-keyframes shake-horizontal /* Safari 和 Chrome */
+{
+	0%{-webkit-transform:translateX(0px);}
+	25%{-webkit-transform:translateX(-5px);}
+	75%{-webkit-transform:translateX(5px);}
+	100%{-webkit-transform:translateX(0px);}
+}
+.shake-horizontal.run{
+	animation:shake-horizontal 100ms infinite linear;
+	-webkit-animation: shake-horizontal 100ms infinite linear;}

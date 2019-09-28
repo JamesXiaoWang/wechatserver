@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhijia.wechatserver.src.deviceserver.mapper.play.PlayResourceMapper">
+	<resultMap id="BaseResultMapByTag" type="com.zhijia.wechatserver.src.deviceserver.entity.play.PlayResourceTag">
+		<result column="id" property="id" jdbcType="INTEGER" />
+		<result column="tagName" property="tagName" jdbcType="VARCHAR" />
+		<result column="tagIco" property="tagIco" jdbcType="VARCHAR" />
+		<result column="status" property="status" jdbcType="INTEGER" />
+	</resultMap>
+	
+	<select id="selectPlayResourceTag" resultMap="BaseResultMapByTag">
+		select id, tagName, tagIco, status from tb_play_resource_tag
+	</select>
+	
+	<select id="selectPlayResourceTagName" resultType="java.lang.String">
+		select tagName from tb_play_resource_tag
+	</select>
+	
+	<insert id="insertPlayResourceTag" parameterType="com.zhijia.wechatserver.src.deviceserver.entity.play.PlayResourceTag">
+		<selectKey resultType ="java.lang.Integer" keyProperty= "id" order= "AFTER">
+             SELECT LAST_INSERT_ID()
+        </selectKey >
+		insert into tb_play_resource_tag(tagName, tagIco, status)
+		values(
+			#{tagName, jdbcType=VARCHAR}, #{tagIco, jdbcType=VARCHAR}, #{status, jdbcType=INTEGER}
+		)
+		<!-- ON DUPLICATE KEY UPDATE
+			tagIco = values(tagIco), status = values(status) -->
+	</insert>
+	
+	<delete id="deletePlayResourceTag">
+		truncate table tb_play_resource_tag
+	</delete>
+	
+	<resultMap id="BaseResultMapByAlbum" type="com.zhijia.wechatserver.src.deviceserver.entity.play.PlayResourceAlbum">
+		<result column="id" property="id" jdbcType="INTEGER" />
+		<result column="tagId" property="tagId" jdbcType="INTEGER" />
+		<result column="tagName" property="tagName" jdbcType="VARCHAR" />
+		<result column="host" property="host" jdbcType="VARCHAR" />
+		<result column="resUrl" property="resUrl" jdbcType="VARCHAR" />
+		<result column="imgUrl" property="imgUrl" jdbcType="VARCHAR" />
+		<result column="img" property="img" jdbcType="VARCHAR" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="introduce" property="introduce" jdbcType="VARCHAR" />
+		<result column="total" property="total" jdbcType="INTEGER" />
+	</resultMap>
+	
+	<select id="selectPlayResourceAlbumList" resultMap="BaseResultMapByAlbum">
+		select id, tagId, tagName, host, resUrl, imgUrl, name, img, introduce, total from tb_play_resource_album
+		where tagId = #{tagId, jdbcType=INTEGER}
+	</select>
+	
+	<select id="selectPlayResourceAlbum" resultMap="BaseResultMapByAlbum">
+		select id, tagId, tagName, host, resUrl, imgUrl, name, img, introduce, total from tb_play_resource_album
+		where id = #{resId, jdbcType=INTEGER}
+	</select>
+	
+	<insert id="insertPlayResourceAlbum" useGeneratedKeys="true" keyProperty="id" parameterType="com.zhijia.wechatserver.src.deviceserver.entity.play.PlayResourceAlbum">
+		insert into tb_play_resource_album(tagId, tagName, host, resUrl, imgUrl, name, img, introduce, total)
+		values(
+			#{tagId, jdbcType=INTEGER}, #{tagName, jdbcType=VARCHAR}, #{host, jdbcType=VARCHAR}, #{resUrl, jdbcType=VARCHAR}, #{imgUrl, jdbcType=VARCHAR}, 
+			#{name, jdbcType=VARCHAR}, #{img, jdbcType=VARCHAR},  #{introduce, jdbcType=INTEGER}, #{total, jdbcType=INTEGER}
+		)
+		
+		<!-- ON DUPLICATE KEY UPDATE
+			resUrl = values(resUrl), imgUrl = values(imgUrl), img = values(img), introduce = values(introduce), total = values(total) -->
+	</insert>
+	
+	<delete id="deletePlayResourceAlbum">
+		truncate table tb_play_resource_album
+	</delete>
+	
+	<resultMap id="BaseResultMapByList" type="com.zhijia.wechatserver.src.deviceserver.entity.play.PlayResourceList">
+		<result column="id" property="id" jdbcType="INTEGER" />
+		<result column="resId" property="resId" jdbcType="INTEGER" />
+		<result column="section" property="section" jdbcType="VARCHAR" />
+		<result column="isFavorite" property="isFavorite" jdbcType="VARCHAR" />
+		<result column="favoriteId" property="favoriteId" jdbcType="VARCHAR" />
+		<result column="res" property="res" jdbcType="VARCHAR" />
+		<result column="isMusic" property="isMusic" jdbcType="VARCHAR" />
+		
+		<result column="tagName" property="tagName" jdbcType="VARCHAR" />
+		<result column="host" property="host" jdbcType="VARCHAR" />
+		<result column="resUrl" property="resUrl" jdbcType="VARCHAR" />
+		<result column="imgUrl" property="imgUrl" jdbcType="VARCHAR" />
+		<result column="img" property="img" jdbcType="VARCHAR" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="introduce" property="introduce" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<select id="selectPlayResourceList" resultMap="BaseResultMapByList">
+		SELECT prl.id, pra.`tagName`,pra.`host`,pra.`resUrl`,pra.`imgUrl`,pra.`introduce`,pra.`img`, prl.resId, 
+			prl.section, prl.isFavorite, prl.favoriteId, prl.res, prl.isMusic 
+		FROM tb_play_resource_album pra
+		LEFT JOIN tb_play_resource_list prl ON pra.`id` = prl.resId
+		WHERE resId = #{resId, jdbcType=INTEGER}
+		ORDER BY prl.id ASC
+	</select>
+	
+	<insert id="insertPlayResourceList" parameterType="java.util.List">
+		insert into tb_play_resource_list(resId, section, isFavorite, favoriteId, res, isMusic)
+		values
+		<foreach collection="list" item="rl" index= "index" separator =",">
+			(
+				#{rl.resId, jdbcType=INTEGER}, #{rl.section, jdbcType=VARCHAR}, #{rl.isFavorite, jdbcType=VARCHAR}, 
+				#{rl.favoriteId, jdbcType=VARCHAR}, #{rl.res, jdbcType=VARCHAR}, #{rl.isMusic, jdbcType=VARCHAR}
+			)
+		</foreach>
+	</insert>
+	
+	<delete id="deletePlayResourceList">
+		truncate table tb_play_resource_list
+	</delete>
+	
+	<select id="selectPlayResourceById" resultType="com.zhijia.wechatserver.src.deviceserver.entity.play.PlayResourceList">
+		SELECT prl.id, pra.`tagName`,pra.`host`,pra.`resUrl`,pra.`imgUrl`,pra.`introduce`,pra.`img`, prl.resId, 
+			prl.section, prl.isFavorite, prl.favoriteId, prl.res, prl.isMusic 
+		FROM tb_play_resource_album pra
+		LEFT JOIN tb_play_resource_list prl ON pra.`id` = prl.resId
+		WHERE prl.`id` = #{id, jdbcType=INTEGER}
+	</select>
+	
+</mapper>

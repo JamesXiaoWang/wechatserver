@@ -1,0 +1,18 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "com.zhijia.wechatserver.src.datasource.DeviceServerDataSourceConfig",
+      "name": "spring.datasource.deviceserver",
+      "sourceMethod": "deviceServerDataSource()",
+      "type": "javax.sql.DataSource"
+    },
+    {
+      "sourceType": "com.zhijia.wechatserver.src.datasource.MqttServerDataSourceConfig",
+      "name": "spring.datasource.mqttserver",
+      "sourceMethod": "mqttServerDataSource()",
+      "type": "javax.sql.DataSource"
+    }
+  ],
+  "properties": []
+}

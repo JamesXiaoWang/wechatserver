@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhijia.wechatserver.src.deviceserver.mapper.wechat.WechatAudioMapper">
+	<resultMap id="BASEResultMap" type="com.zhijia.wechatserver.src.deviceserver.entity.wechat.Audio">
+		<result column="id" property="id" jdbcType="INTEGER" />
+		<result column="file_path" property="file_path" jdbcType="VARCHAR" />
+		<result column="status" property="status" jdbcType="INTEGER" />
+		<result column="create_date" property="create_date" jdbcType="TIMESTAMP" />
+		<result column="update_date" property="update_date" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<select id="selectWechatAudioFile" resultMap="BASEResultMap">
+		SELECT * FROM tb_wechat_audio
+	</select>
+
+	<insert id="addWechatAudioFile" parameterType="com.zhijia.wechatserver.src.deviceserver.entity.wechat.Audio">
+		INSERT INTO tb_wechat_audio(`file_path`,`status`,`create_date`,`update_date`)
+			VALUES(#{file_path, jdbcType=VARCHAR},#{status, jdbcType=INTEGER},#{create_date, jdbcType=TIMESTAMP},#{update_date, jdbcType=TIMESTAMP})
+	</insert>
+</mapper>

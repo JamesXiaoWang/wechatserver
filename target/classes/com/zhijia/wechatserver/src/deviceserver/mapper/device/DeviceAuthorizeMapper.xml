@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhijia.wechatserver.src.deviceserver.mapper.device.DeviceAuthorizeMapper">
+	<resultMap id="BASEResultMap" type="com.zhijia.wechatserver.src.deviceserver.entity.device.DeviceAuthorize">
+		<result column="id" property="id" jdbcType="INTEGER" />
+		<result column="zjkey" property="zjkey" jdbcType="VARCHAR" />
+		<result column="productId" property="productId" jdbcType="VARCHAR" />
+		<result column="deviceId" property="deviceId" jdbcType="VARCHAR" />
+		<result column="mac" property="mac" jdbcType="VARCHAR" />
+		<result column="connectProtocol" property="connectProtocol" jdbcType="VARCHAR" />
+		<result column="authKey" property="authKey" jdbcType="VARCHAR" />
+		<result column="closeStrategy" property="closeStrategy" jdbcType="VARCHAR" />
+		<result column="connStrategy" property="connStrategy" jdbcType="VARCHAR" />
+		<result column="cryptMethod" property="cryptMethod" jdbcType="VARCHAR" />
+		<result column="authVer" property="authVer" jdbcType="VARCHAR" />
+		<result column="manuMacPos" property="manuMacPos" jdbcType="VARCHAR" />
+		<result column="serMacPos" property="serMacPos" jdbcType="VARCHAR" />
+		<result column="bleSimpleProtocol" property="bleSimpleProtocol" jdbcType="VARCHAR" />
+		<result column="authDate" property="authDate" jdbcType="TIMESTAMP" />
+		<result column="isAuthorize" property="isAuthorize" jdbcType="INTEGER" />
+		<result column="isBind" property="isBind" jdbcType="INTEGER" />
+	</resultMap>
+	
+	<sql id="Base_Column_List">
+		id, zjkey, productId, deviceId, mac, connectProtocol, authKey, closeStrategy, connStrategy, cryptMethod, authVer,
+		manuMacPos, serMacPos, bleSimpleProtocol, authDate, isAuthorize, isBind
+	</sql>
+	
+	<insert id="insertAuthorizeDevice" useGeneratedKeys="true" keyProperty="id" parameterType="com.zhijia.wechatserver.src.deviceserver.entity.device.DeviceAuthorize">
+		insert into tb_device_authorize(zjkey, productId, deviceId, mac, connectProtocol, authKey, closeStrategy, connStrategy, cryptMethod, authVer,
+			manuMacPos, serMacPos, bleSimpleProtocol, isAuthorize)
+		values(#{zjkey, jdbcType=VARCHAR}, #{productId, jdbcType=VARCHAR}, #{deviceId, jdbcType=VARCHAR}, #{mac, jdbcType=VARCHAR}, 
+			#{connectProtocol, jdbcType=VARCHAR}, #{authKey, jdbcType=VARCHAR}, #{closeStrategy, jdbcType=VARCHAR}, #{connStrategy, jdbcType=VARCHAR}, 
+			#{cryptMethod, jdbcType=VARCHAR}, #{authVer, jdbcType=VARCHAR},
+			#{manuMacPos, jdbcType=VARCHAR}, #{serMacPos, jdbcType=VARCHAR}, #{bleSimpleProtocol, jdbcType=VARCHAR}, #{isAuthorize, jdbcType=INTEGER})
+		ON DUPLICATE KEY
+		UPDATE
+			connectProtocol = values(connectProtocol), authKey = values(authKey), closeStrategy = values(closeStrategy), connStrategy = values(connStrategy), 
+			cryptMethod = values(cryptMethod), authVer = values(authVer), manuMacPos = values(manuMacPos), serMacPos = values(serMacPos), 
+			bleSimpleProtocol = values(bleSimpleProtocol), isAuthorize = values(isAuthorize)
+	</insert>
+	
+	<update id="updateAuthorizeDevice" parameterType="com.zhijia.wechatserver.src.deviceserver.entity.device.DeviceAuthorize">
+		update tb_device_authorize set isBind = #{isBind, jdbcType=INTEGER}
+		where id = #{id, jdbcType=INTEGER}
+	</update>
+	
+	<select id="selectDevciceByParams" resultType="com.zhijia.wechatserver.src.deviceserver.entity.device.DeviceAuthorize" >
+		select id, zjkey, productId, deviceId, mac, connectProtocol, authKey, closeStrategy, connStrategy, cryptMethod, authVer,
+		manuMacPos, serMacPos, bleSimpleProtocol, authDate, isAuthorize, isBind from tb_device_authorize
+		where zjkey = #{zjkey, jdbcType=VARCHAR} and deviceid = #{deviceid, jdbcType=VARCHAR} 
+	</select>
+</mapper>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhijia.wechatserver.src.deviceserver.mapper.device.DeviceClockMapper">
+	<resultMap id="BaseResultMap" type="com.zhijia.wechatserver.src.deviceserver.entity.device.DeviceClock">
+		<result column="id" property="id" jdbcType="INTEGER" />
+		<result column="openid" property="openid" jdbcType="VARCHAR" />
+		<result column="zjkey" property="zjkey" jdbcType="VARCHAR" />
+		<result column="deviceId" property="deviceId" jdbcType="VARCHAR" />
+		<result column="title" property="title" jdbcType="VARCHAR" />
+		<result column="clock" property="clock" jdbcType="VARCHAR" />
+		<result column="time" property="time" jdbcType="BIGINT" />
+		<result column="status" property="status" jdbcType="INTEGER" />
+		<result column="repeatTime" property="repeatTime" jdbcType="VARCHAR" />
+		<result column="deleted" property="deleted" jdbcType="INTEGER" />
+	</resultMap>
+	
+	<select id="selectDeviceClockListByParams" resultMap="BaseResultMap">
+		select id, openid, zjkey, deviceId, title, clock, time, status, repeatTime, deleted from tb_device_clock
+		where deleted = 0 and 
+			openid = #{openid, jdbcType=VARCHAR}
+			and zjkey = #{zjkey, jdbcType=VARCHAR}
+			and deviceId = #{deviceId, jdbcType=VARCHAR}
+		order by id
+	</select>
+	
+	<select id="selectDeviceClockById" resultMap="BaseResultMap">
+		select id, openid, zjkey, deviceId, title, clock, time, status, repeatTime, deleted from tb_device_clock
+		where deleted = 0 and id = #{id, jdbcType=INTEGER}
+	</select>
+	
+	<insert id="insertDeviceClock" parameterType="com.zhijia.wechatserver.src.deviceserver.entity.device.DeviceClock">
+		<selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+          SELECT LAST_INSERT_ID()
+      	</selectKey>
+		insert into tb_device_clock(openid, zjkey, deviceId, title, clock, time, status, repeatTime, deleted)
+		values(
+			#{openid, jdbcType=VARCHAR}, #{zjkey, jdbcType=VARCHAR}, #{deviceId, jdbcType=VARCHAR},
+			#{title, jdbcType=VARCHAR}, #{clock, jdbcType=VARCHAR}, #{time, jdbcType=BIGINT}, 
+			#{status, jdbcType=INTEGER}, #{repeatTime, jdbcType=VARCHAR}, #{deleted, jdbcType=INTEGER}
+		)
+	</insert>
+	
+	<delete id="deleteDeviceClock" parameterType="com.zhijia.wechatserver.src.deviceserver.entity.device.DeviceClock">
+		delete from tb_device_clock where openid = #{openid, jdbcType=VARCHAR}
+			and zjkey = #{zjkey, jdbcType=VARCHAR}
+			and deviceId = #{deviceId, jdbcType=VARCHAR}
+	</delete>
+	
+	<update id="updateDeviceClock" parameterType="com.zhijia.wechatserver.src.deviceserver.entity.device.DeviceClock">
+		update tb_device_clock set 
+			clock = #{clock, jdbcType=VARCHAR},
+			time = #{time, jdbcType=BIGINT},
+			repeatTime = #{repeatTime, jdbcType=VARCHAR},
+			status = #{status, jdbcType=INTEGER}, 
+			deleted = #{deleted, jdbcType=INTEGER} 
+		where 
+			id = #{id, jdbcType=INTEGER}
+	</update>
+</mapper>

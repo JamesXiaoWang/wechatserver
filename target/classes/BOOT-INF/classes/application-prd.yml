@@ -1,0 +1,42 @@
+server:
+  port: 8082
+  servlet:
+    context-path: /wechatserver
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driverClassName: com.mysql.jdbc.Driver
+    deviceserver:
+      name: deviceserver
+      # 使用hikari数据源
+      jdbcUrl: jdbc:mysql://47.106.172.221:3306/device_server?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false&serverTimezone=UTC
+      username: cszjoffice
+      password: QAZcszj1608
+    mqttserver:
+      name: mqttserver
+      # 使用hikari数据源
+      jdbcUrl: jdbc:mysql://47.106.172.221:3306/mqtt?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false&serverTimezone=UTC
+      username: cszjoffice
+      password: QAZcszj1608
+    maxActive: 20
+    initialSize: 1
+    maxWait: 60000
+    minIdle: 1
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    # validationQuery: select 'x'
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxOpenPreparedStatements: 20
+    
+  jpa:
+    database: mysql
+    show-sql: true
+
+  redis: 
+    database: 0
+    host: 47.106.172.221
+    port: 6379
+    password: cszjoffice

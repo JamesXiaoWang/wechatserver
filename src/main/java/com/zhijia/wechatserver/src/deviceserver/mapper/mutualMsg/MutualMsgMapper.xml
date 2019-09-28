@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhijia.wechatserver.src.deviceserver.mapper.mutualMsg.MutualMsgMapper" >
+	
+	<!-- 交互信息 - 语音信息 -->
+	<resultMap id="VoiceBaseResultMap" type="com.zhijia.wechatserver.src.deviceserver.entity.mutualMsg.VoiceMsg">
+		<result column="msgId" property="msgId" jdbcType="BIGINT" />
+		<result column="toUserName" property="toUserName" jdbcType="VARCHAR" />
+		<result column="fromUserName" property="fromUserName" jdbcType="VARCHAR" />
+		<result column="deviceId" property="deviceId" jdbcType="VARCHAR" />
+		<result column="msgType" property="msgType" jdbcType="VARCHAR" />
+		<result column="mediaId" property="mediaId" jdbcType="VARCHAR" />
+		<result column="format" property="format" jdbcType="VARCHAR" />
+		<result column="recognition" property="recognition" jdbcType="VARCHAR" />
+		<result column="createTime" property="createTime" jdbcType="INTEGER" />
+		<result column="createTimeTf" property="createTimeTf" jdbcType="TIMESTAMP"/>
+		<result column="ratained" property="ratained" jdbcType="BOOLEAN"/>
+	</resultMap>
+	
+	<insert id="insertVoiceMsg" parameterType="com.zhijia.wechatserver.src.deviceserver.entity.mutualMsg.VoiceMsg">
+		insert into tb_voice_msg(msgId, toUserName, fromUserName, deviceId, recognition, msgType, mediaId, format, createTime, createTimeTf, ratained)
+		values(
+			#{msgId, jdbcType=BIGINT}, #{toUserName, jdbcType=VARCHAR}, 
+			#{fromUserName, jdbcType=VARCHAR}, #{deviceId, jdbcType=VARCHAR}, #{recognition, jdbcType=VARCHAR},
+			#{msgType, jdbcType=VARCHAR}, #{mediaId, jdbcType=VARCHAR}, 
+			#{format, jdbcType=VARCHAR}, #{createTime, jdbcType=INTEGER},
+			#{createTimeTf, jdbcType=TIMESTAMP}, #{ratained, jdbcType=BOOLEAN}
+		)
+	</insert>
+</mapper>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhijia.wechatserver.src.deviceserver.mapper.device.DeviceStatusMapper">
+	<resultMap id="BaseResultMap" type="com.zhijia.wechatserver.src.deviceserver.entity.device.DeviceStatus">
+		<result column="zjkey" property="zjkey" jdbcType="VARCHAR" />
+		<result column="deviceId" property="deviceId" jdbcType="VARCHAR" />
+		<result column="vol" property="vol" jdbcType="INTEGER" />
+		<result column="battery" property="battery" jdbcType="INTEGER" />
+		<result column="sfree" property="sfree" jdbcType="INTEGER" />
+		<result column="stotal" property="stotal" jdbcType="INTEGER" />
+		<result column="shake" property="shake" jdbcType="INTEGER" />
+		<result column="bln" property="bln" jdbcType="INTEGER" />
+		<result column="play" property="play" jdbcType="INTEGER" />
+		<result column="charging" property="charging" jdbcType="INTEGER" />
+		<result column="lbi" property="lbi" jdbcType="INTEGER" />
+		<result column="tcard" property="tcard" jdbcType="INTEGER" />
+		<result column="power" property="power" jdbcType="INTEGER" />
+		<result column="online" property="online" jdbcType="INTEGER" />
+		<result column="clock" property="clock" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<select id="selectDeviceStatusByDeviceId" resultMap="BaseResultMap">
+		select zjkey, deviceId, vol, battery, sfree, stotal, shake, bln, play, charging, lbi, tcard, power, online, clock from tb_device_status
+		where zjkey = #{zjkey, jdbcType=VARCHAR} and deviceId = #{deviceId, jdbcType=VARCHAR}
+	</select>
+	
+	<insert id="insertAndUpdateDeviceStatus" parameterType="com.zhijia.wechatserver.src.deviceserver.entity.device.DeviceStatus" >
+		insert into tb_device_status(zjkey, deviceId, vol, battery, sfree, stotal, shake, bln, play, charging, lbi, tcard, power, online, clock)
+		values(
+			#{zjkey, jdbcType=VARCHAR}, #{deviceId, jdbcType=VARCHAR}, #{vol, jdbcType=INTEGER}, #{battery, jdbcType=INTEGER}, 
+			#{sfree, jdbcType=INTEGER}, #{stotal, jdbcType=INTEGER}, #{shake, jdbcType=INTEGER}, #{bln, jdbcType=INTEGER}, 
+			#{play, jdbcType=INTEGER}, #{charging, jdbcType=INTEGER}, #{lbi, jdbcType=INTEGER}, #{tcard, jdbcType=INTEGER},
+			#{power, jdbcType=INTEGER}, #{online, jdbcType=INTEGER}, #{clock, jdbcType=VARCHAR}
+		)
+		ON DUPLICATE KEY UPDATE
+			vol = values(vol), battery = values(battery), sfree = values(sfree), stotal = values(stotal), shake = values(shake),
+			bln = values(bln), play = values(play), charging = values(charging), lbi = values(lbi), tcard = values(tcard),
+			power = values(power), online = values(online), clock = values(clock)
+	</insert>
+</mapper>

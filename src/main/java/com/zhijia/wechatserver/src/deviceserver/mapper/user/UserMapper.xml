@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhijia.wechatserver.src.deviceserver.mapper.user.UserMapper">
+	<resultMap  id="UserBindBaseResultMap" type="com.zhijia.wechatserver.src.deviceserver.entity.user.UserBind">
+		<result column="id" property="id" jdbcType="INTEGER" />
+		<result column="openid" property="openid" jdbcType="VARCHAR" />
+		<result column="deviceId" property="deviceId" jdbcType="VARCHAR" />
+		<result column="isBind" property="isBind" jdbcType="INTEGER" />
+		<result column="bindDate" property="bindDate" jdbcType="TIMESTAMP" />
+		<result column="unbindDate" property="unbindDate" jdbcType="TIMESTAMP" />
+	</resultMap>
+	
+	<insert id="insertUserBind" parameterType="com.zhijia.wechatserver.src.deviceserver.entity.user.UserBind">
+		insert into tb_user_bind(openid, deviceId, isBind, bindDate, unbindDate)
+			values(
+				#{openid, jdbcType=VARCHAR}, #{deviceId, jdbcType=VARCHAR}, #{isBind, jdbcType=INTEGER}, #{bindDate, jdbcType=TIMESTAMP},
+				#{unbindDate, jdbcType=TIMESTAMP}
+			)
+		ON DUPLICATE KEY UPDATE
+			isBind = values(isBind), bindDate = values(bindDate), unbindDate = values(unbindDate)
+	</insert>
+	
+	<update id="updateUserBind" parameterType="com.zhijia.wechatserver.src.deviceserver.entity.user.UserBind">
+		update tb_user_bind
+			set 
+				isBind = #{isBind, jdbcType=INTEGER},
+				unbindDate = #{unbindDate, jdbcType=TIMESTAMP}
+		where
+			openid = #{openid, jdbcType=VARCHAR} and deviceId = #{deviceId, jdbcType=VARCHAR}
+	</update>
+	
+	<select id="selectUserIsBindForDevice" resultMap="UserBindBaseResultMap">
+		select id, openid, deviceId, isBind, bindDate from tb_user_bind where isBind = 1
+		and openid = #{openid, jdbcType=VARCHAR}
+	</select>
+	
+	<select id="selectUserBindForDevice" resultMap="UserBindBaseResultMap">
+		select id, openid, deviceId, isBind, bindDate from tb_user_bind where openid = #{openid, jdbcType=VARCHAR}
+	</select>
+</mapper>
